@@ -106,3 +106,44 @@ Time ~=    39.32
 
 Reads = 0 + (0 * s)
 Writes = 1 + (0 * s)
+```
+
+输出 weight.rs
+
+https://github.com/zacksleo/substrate-node-template-benchmark/blob/master/pallets/template/src/weights.rs
+
+```rust
+
+/// ---snip----
+
+#![cfg_attr(rustfmt, rustfmt_skip)]
+#![allow(unused_parens)]
+#![allow(unused_imports)]
+
+use frame_support::{traits::Get, weights::{Weight, constants::RocksDbWeight}};
+use sp_std::marker::PhantomData;
+
+/// Weight functions needed for pallet_template.
+pub trait WeightInfo {
+	fn do_something(s: u32, ) -> Weight;
+}
+
+/// Weights for pallet_template using the Substrate node and recommended hardware.
+pub struct SubstrateWeight<T>(PhantomData<T>);
+impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
+	// Storage: TemplateModule Something (r:0 w:1)
+	fn do_something(_s: u32, ) -> Weight {
+		(39_329_000 as Weight)
+			.saturating_add(T::DbWeight::get().writes(1 as Weight))
+	}
+}
+
+// For backwards compatibility and tests
+impl WeightInfo for () {
+	// Storage: TemplateModule Something (r:0 w:1)
+	fn do_something(_s: u32, ) -> Weight {
+		(39_329_000 as Weight)
+			.saturating_add(RocksDbWeight::get().writes(1 as Weight))
+	}
+}
+```
