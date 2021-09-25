@@ -147,3 +147,16 @@ impl WeightInfo for () {
 	}
 }
 ```
+
+## Chain Spec 生成
+
+```bash
+# Export the local chain spec to json
+./target/release/node-template build-spec --disable-default-bootnode --chain local > ./.chain-spec/customSpec.json
+```
+
+chain spec raw:
+
+```bash
+./target/release/node-template build-spec --chain=./.chain-spec/customSpec.json --raw --disable-default-bootnode > ./.chain-spec/customSpecRaw.json
+```
